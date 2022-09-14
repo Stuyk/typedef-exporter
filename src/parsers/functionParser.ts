@@ -32,10 +32,18 @@ export function getFunctions(contents: string[]): Array<FunctionInfo> {
                     continue;
                 }
 
+                // Hard to read this; but basicaly...
+                // Read the function params from JSDoc styling
+                // Loop through the params, and replace the 'key' if it is present in the string.
+                // Once the 'key' is removed. It should be safe to append the comment to the function args.
                 const commentInfo = commentParser(currentComments);
                 for (let paramIndex = 0; paramIndex < commentInfo.params.length; paramIndex++) {
                     if (functions[functions.length - 1].arguments[paramIndex]) {
-                        functions[functions.length - 1].arguments[paramIndex].comment = commentInfo.params[paramIndex];
+                        const key = functions[functions.length - 1].arguments[paramIndex].key;
+                        const keyLength = key.replace('...', '').length + 1;
+                        const currentComment = commentInfo.params[paramIndex];
+                        const cleanedComment = currentComment.slice(keyLength, currentComment.length);
+                        functions[functions.length - 1].arguments[paramIndex].comment = cleanedComment;
                     }
                 }
 
