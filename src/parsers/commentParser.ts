@@ -1,5 +1,13 @@
 import { CommentInfo } from '../interfaces/commentInfo';
 
+/**
+ * Extracts comment information from a JSDoc Comment Block
+ * Automatically categorizes it based on some `@` parameters.
+ *
+ * @export
+ * @param {Array<string>} comments
+ * @return {*}
+ */
 export function commentParser(comments: Array<string>) {
     // Remove first line
     comments.shift();

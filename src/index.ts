@@ -2,6 +2,8 @@ import fs from 'fs';
 import fetch from 'cross-fetch';
 import { FunctionInfo } from './interfaces/functionInfo';
 import { getFunctions } from './parsers/functionParser';
+import { PropertyInfo } from './interfaces/propertyInfo';
+import { ClassInfo } from './interfaces/classInfo';
 
 export class TypeDefExporter {
     private contents: string[];
@@ -61,7 +63,44 @@ export class TypeDefExporter {
         return this.contents.join('\r\n');
     }
 
+    /**
+     * Returns all functions and function information exported with... `export function`.
+     * Does not have support for fat arrow exports.
+     *
+     * @return {Array<FunctionInfo>}
+     * @memberof TypeDefExporter
+     */
     getFunctions(): Array<FunctionInfo> {
         return getFunctions(this.contents);
+    }
+
+    /**
+     * Returns all consts that are not functions.
+     *
+     * @return {Array<PropertyInfo>}
+     * @memberof TypeDefExporter
+     */
+    getProperties(): Array<PropertyInfo> {
+        throw new Error('getProperties - Not Currently Implemented');
+    }
+
+    /**
+     * Returns all enums
+     *
+     * @return {Array<unknown>}
+     * @memberof TypeDefExporter
+     */
+    getEnums(): Array<unknown> {
+        throw new Error('getEnums - Not Currently Implemented');
+    }
+
+    /**
+     * Returns all classes and their functions, properties, constructors, etc.
+     *
+     * @return {Array<ClassInfo>}
+     * @memberof TypeDefExporter
+     */
+    getClasses(): Array<ClassInfo> {
+        throw new Error('getClasses - Not Currently Implemented');
     }
 }

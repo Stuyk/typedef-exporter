@@ -6,7 +6,14 @@ import { commentParser } from './commentParser';
 
 const whatToFind = ['function', '(', ')', ';'];
 
-export function getFunctions(contents: string[]): Array<FunctionInfo> {
+/**
+ * Returns a list of functions and their information from a file array.
+ *
+ * @export
+ * @param {string[]} contents
+ * @return {Array<FunctionInfo>}
+ */
+export function getFunctions(contents: string[], whatToFindOverride: Array<string> = undefined): Array<FunctionInfo> {
     const functions: Array<FunctionInfo> = [];
 
     let isFindingComment = false;
@@ -60,7 +67,7 @@ export function getFunctions(contents: string[]): Array<FunctionInfo> {
             continue;
         }
 
-        if (!hasAllInTextLine(line, whatToFind)) {
+        if (!hasAllInTextLine(line, whatToFindOverride ? whatToFindOverride : whatToFind)) {
             continue;
         }
 
