@@ -62,5 +62,7 @@ describe('api tests', () => {
         assert(hasFoundAtLeastOneComment, `Could not find any comments inside of arguments.`);
         assert(hasFoundDescriptionWithLongerLength, `Could not find any descriptions extracted from comments`);
         assert(hasFoundDeprecated, `Could not find any example comments with a deprecated tag.`);
+
+        console.log(JSON.stringify(functions, null, '\t'));
     });
 });
